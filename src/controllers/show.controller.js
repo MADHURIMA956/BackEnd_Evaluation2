@@ -30,4 +30,18 @@ router.get('/', async (req,res) => {
     return res.send(show)
 });
 
+router.get('/movie', async (req,res) => {
+
+    try{
+        const movie = await Movie.find({"actors" : {$eq : movie }}).lean().exec();
+        return res.send(movie)
+    }catch(e){
+        return res.status(500).json({
+            status: "Failed",
+            message : e.message
+        });
+    }
+   
+});
+
 module.exports = router;
