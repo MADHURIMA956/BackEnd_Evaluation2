@@ -6,7 +6,7 @@ const seatSchema = new Schema(
         
         show:{
             type: Schema.Types.ObjectId,
-            ref:'theater',
+            ref:'show',
             required:true
         },
     },

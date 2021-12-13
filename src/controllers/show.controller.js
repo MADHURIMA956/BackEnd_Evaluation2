@@ -1,23 +1,21 @@
 const express = require('express');
 
-const show = require('../models/show.model');
+const Show = require('../models/show.model');
 
 const router = express.Router();
 
-router.post('/', authenticate , async (req,res) => {
+router.post('/', async (req,res) => {
     try{
 
         //const user = req.user;
-        const movie = await Movie.create({
-            name:req.body.name,
-            actors:req.body.actors,
-            languages:req.body.languages,
-            directors:req.body.directors,
-            poster_url:req.body.poster_url,
-            
+        const show = await Show.create({
+            timing:req.body.timing,
+            movie:req.body.movie,
+            total_seats:req.body.total_seats,
+            screen:req.body.screen,    
 
         });
-        return res.status(201).json({movie})
+        return res.status(201).json({show})
 
     }catch (e){
         return res.status(500).json({
@@ -28,8 +26,8 @@ router.post('/', authenticate , async (req,res) => {
 });
 
 router.get('/', async (req,res) => {
-    const movie = await Movie.find().lean().exec();
-    return res.send(movie)
+    const show = await Show.find().lean().exec();
+    return res.send(show)
 });
 
 module.exports = router;
